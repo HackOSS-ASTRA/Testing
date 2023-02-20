@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-    - "test-*"  # Support wildcard matching
+    - test-*  # Support wildcard matching
 
 jobs:
   pull-request:
@@ -11,9 +11,9 @@ jobs:
     - name: pull-request
       uses: repo-sync/pull-request@v2
       with:
-        destination_branch: "main"                      # If blank, default: master
-        pr_title: "[${{ github.ref }}]" # Title of pull request
-        pr_body: |                                        # Full markdown support, requires pr_title to be set
+        destination_branch: "main"
+        pr_title: "[${{ github.ref }}]"
+        pr_body: |
           :crown: *An automated PR*
 
           _Created by [repo-sync/pull-request](https://github.com/repo-sync/pull-request)_
