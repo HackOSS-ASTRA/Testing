@@ -1,0 +1,19 @@
+on:
+  push:
+    branches:
+    - "test-*"  # Support wildcard matching
+
+jobs:
+  pull-request:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: pull-request
+      uses: repo-sync/pull-request@v2
+      with:
+        destination_branch: "main"                      # If blank, default: master
+        pr_title: "[${{ github.ref }}]" # Title of pull request
+        pr_body: |                                        # Full markdown support, requires pr_title to be set
+          :crown: *An automated PR*
+
+          _Created by [repo-sync/pull-request](https://github.com/repo-sync/pull-request)_
