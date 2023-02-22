@@ -28,10 +28,10 @@ jobs:
         if: '!steps.check.outputs.skip'
         env:
           BRANCH: ${{ github.ref_name }}
-        id: identifier
-        run: echo "::set-output name=fragment::${BRANCH%{${BRANCH#*-[0-9]+-}}"
-        id: title
-        run: echo "::set-output name=fragment::${BRANCH#*-[0-9]+-}"
+        id: split
+        run: 
+          echo "::set-output name=identifier::${BRANCH%{${BRANCH#*-[0-9]+-}}"
+          echo "::set-output name=title::${BRANCH#*-[0-9]+-}"
 
         uses: actions/github-script@v6
         with:
@@ -39,8 +39,8 @@ jobs:
             const { repo, owner } = context.repo;
             const result = await github.rest.pulls.create({
               title: [
-                '[${{ steps.identifier.outputs.fragment }}]',
-                '${{ steps.title.outputs.fragment }}'
+                '[${{ steps.split.outputs.identifier }}]',
+                '${{ steps.split.outputs.title }}'
               ].join(' '),
               owner,
               repo,
