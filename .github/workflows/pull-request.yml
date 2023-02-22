@@ -35,6 +35,7 @@ jobs:
           echo "$Issue_Title"
 
       - name: Create pull request
+        if: '!steps.check.outputs.skip'
         uses: actions/github-script@v6
         with:
           script: |
