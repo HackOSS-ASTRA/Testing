@@ -34,7 +34,7 @@ jobs:
         run:
           # echo "${ BRANCH% ${BRANCH#*-[0-9]+-}}"
           # echo "${ BRANCH#*-[0-9]+-}"
-          echo "${BRANCH#*-[0-9]+-}"
+          echo "${BRANCH#*-}"
 
       - name: Create pull request
         if: '!steps.check.outputs.skip'
