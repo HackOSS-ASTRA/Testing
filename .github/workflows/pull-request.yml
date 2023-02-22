@@ -24,7 +24,7 @@ jobs:
               echo "skip=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Create Pull Request
+      - name: Split string
         if: '!steps.check.outputs.skip'
         env:
           BRANCH: ${{ github.ref_name }}
@@ -33,6 +33,7 @@ jobs:
           echo "::set-output name=identifier::${BRANCH%{${BRANCH#*-[0-9]+-}}"
           echo "::set-output name=title::${BRANCH#*-[0-9]+-}"
 
+      - name: Create pull request
         uses: actions/github-script@v6
         with:
           script: |
