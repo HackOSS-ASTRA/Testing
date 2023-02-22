@@ -24,23 +24,21 @@ jobs:
               echo "skip=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Split string
+      - name: Issue title
         # if: '!steps.check.outputs.skip'
         env:
           BRANCH: ${{ github.ref_name }}
         id: split
         run:
-          # echo "${ BRANCH% ${BRANCH#*-*-}}"
           echo "ISSUE_TITLE=${BRANCH#*-*-}" >> "$GITHUB_OUTPUT"
-          echo "ISSUE_ID=${BRANCH%${{ steps.split.outputs.ISSUE_TITLE }}}" >> "$GITHUB_OUTPUT"
 
-      - name: Checking
+      - name: Issue id
         env:
+          BRANCH: ${{ github.ref_name }}
           ISSUE_TITLE: ${{ steps.split.outputs.ISSUE_TITLE }}
-          ISSUE_ID: ${{ steps.split.outputs.ISSUE_ID }}
         run:
-          echo "$ISSUE_ID"
           echo "$ISSUE_TITLE"
+          echo "${BRANCH%$ISSUE_TITLE}"
           
 
       - name: Create pull request
