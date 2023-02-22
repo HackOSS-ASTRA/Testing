@@ -27,9 +27,8 @@ jobs:
       - name: Split string
         if: '!steps.check.outputs.skip'
         env:
-          BRANCH: ${{ github.ref_name }}
-          Issue_ID: ${BRANCH%{${BRANCH#*-[0-9]+-}}
-          Issue_Title: ${BRANCH#*-[0-9]+-}
+          Issue_ID: ${github.ref_name%{${github.ref_name#*-[0-9]+-}}
+          Issue_Title: ${github.ref_name#*-[0-9]+-}
         id: split
         run:
           echo "$Issue_ID"
@@ -42,8 +41,8 @@ jobs:
             const { repo, owner } = context.repo;
             const result = await github.rest.pulls.create({
               title: [
-                '[$Issue_ID]',
-                '$Issue_Title'
+                '[${{ env.Issue_ID }}]',
+                '${{ env.Issue_Title }}'
               ].join(' '),
               owner,
               repo,
