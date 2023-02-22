@@ -28,18 +28,25 @@ jobs:
         # if: '!steps.check.outputs.skip'
         env:
           BRANCH: ${{ github.ref_name }}
-        id: split
+        id: issue_title
         run:
           echo "ISSUE_TITLE=${BRANCH#*-*-}" >> "$GITHUB_OUTPUT"
 
       - name: Issue id
         env:
           BRANCH: ${{ github.ref_name }}
-          ISSUE_TITLE: ${{ steps.split.outputs.ISSUE_TITLE }}
+          ISSUE_TITLE: ${{ steps.issue_title.outputs.ISSUE_TITLE }}
+        id: issue_id
         run:
-          echo "$ISSUE_TITLE"
-          echo "${BRANCH%-$ISSUE_TITLE}"
-          
+          echo "ISSUE_ID=${BRANCH%-$ISSUE_TITLE}" >> "$GITHUB_OUTPUT"
+
+      - name: Check name
+        env:
+          ISSUE_ID: ${{ steps.issue_id.outputs.ISSUE_ID }}
+          ISSUE_TITLE: ${{ steps.issue_title.outputs.ISSUE_TITLE }}
+        run:
+          echo "$ISSUE_ID"
+          echo "$ISSUE_TITLE"  
 
       - name: Create pull request
         if: '!steps.check.outputs.skip'
