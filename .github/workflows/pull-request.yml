@@ -32,7 +32,7 @@ jobs:
           Issue_Title: ${ ${{github.ref_name }}#*-[0-9]+-}
         id: split
         run:
-          echo "${ BRANCH% BRANCH#*-[0-9]+-}"
+          echo "${ BRANCH% ${BRANCH#*-[0-9]+-}}"
           echo "${ BRANCH#*-[0-9]+-}"
 
       - name: Create pull request
