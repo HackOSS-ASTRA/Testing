@@ -28,21 +28,22 @@ jobs:
         if: '!steps.check.outputs.skip'
         env:
           BRANCH: ${{ github.ref_name }}
+          Issue_ID: ${BRANCH%{${BRANCH#*-[0-9]+-}}
+          Issue_Title: ${BRANCH#*-[0-9]+-}
         id: split
-        run: |
-          echo "::set-output name=identifier::${BRANCH%{${BRANCH#*-[0-9]+-}}"
-          echo "::set-output name=title::${BRANCH#*-[0-9]+-}"
+        run:
+          echo "$Issue_ID"
+          echo "$Issue_Title"
 
       - name: Create pull request
-        if: '!steps.check.outputs.skip'
         uses: actions/github-script@v6
         with:
           script: |
             const { repo, owner } = context.repo;
             const result = await github.rest.pulls.create({
               title: [
-                '[${{ steps.split.outputs.identifier }}]',
-                '${{ steps.split.outputs.title }}'
+                '[$Issue_ID]',
+                '$Issue_Title'
               ].join(' '),
               owner,
               repo,
