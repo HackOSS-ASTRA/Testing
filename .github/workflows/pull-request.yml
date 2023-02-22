@@ -29,12 +29,12 @@ jobs:
         env:
           BRANCH: ${{ github.ref_name }}
           Issue_ID: ${ ${{ github.ref_name }}% ${{ github.ref_name }}#*-[0-9]+-}
-          Issue_Title: ${ ${{github.ref_name }}#*-[0-9]+-}
+          Issue_Title: "${ ${{ github.ref_name }}#*-*-}"
         id: split
         run:
-          # echo "${ BRANCH% ${BRANCH#*-[0-9]+-}}"
-          # echo "${ BRANCH#*-[0-9]+-}"
+          echo "${ BRANCH% ${BRANCH#*-*-}}"
           echo "${BRANCH#*-*-}"
+          echo "${Issue_Title}"
 
       - name: Create pull request
         if: '!steps.check.outputs.skip'
