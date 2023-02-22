@@ -27,12 +27,13 @@ jobs:
       - name: Split string
         if: '!steps.check.outputs.skip'
         env:
+          BRANCH: ${{ github.ref_name }}
           Issue_ID: ${ ${{ github.ref_name }}% ${{ github.ref_name }}#*-[0-9]+-}
           Issue_Title: ${ ${{github.ref_name }}#*-[0-9]+-}
         id: split
         run:
-          echo "$Issue_ID"
-          echo "$Issue_Title"
+          echo "${ BRANCH% BRANCH#*-[0-9]+-}"
+          echo "${ BRANCH#*-[0-9]+-}"
 
       - name: Create pull request
         if: '!steps.check.outputs.skip'
