@@ -31,7 +31,7 @@ jobs:
         id: split
         run:
           # echo "${ BRANCH% ${BRANCH#*-*-}}"
-          echo "ISSUE_TITLE=${BRANCH#*-*-}" >> $GITHUB_OUTPUT"
+          echo "ISSUE_TITLE=${BRANCH#*-*-}" >> "$GITHUB_OUTPUT"
 
       - name: Checking
         env:
