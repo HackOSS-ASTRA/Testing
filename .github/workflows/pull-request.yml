@@ -32,12 +32,16 @@ jobs:
         run:
           # echo "${ BRANCH% ${BRANCH#*-*-}}"
           echo "ISSUE_TITLE=${BRANCH#*-*-}" >> "$GITHUB_OUTPUT"
+          echo "ISSUE_ID=${BRANCH%${{ steps.split.outputs.ISSUE_TITLE }}}" >> "$GITHUB_OUTPUT"
 
       - name: Checking
         env:
           ISSUE_TITLE: ${{ steps.split.outputs.ISSUE_TITLE }}
+          ISSUE_ID: ${{ steps.split.outputs.ISSUE_ID }}
         run:
+          echo "$ISSUE_ID"
           echo "$ISSUE_TITLE"
+          
 
       - name: Create pull request
         if: '!steps.check.outputs.skip'
