@@ -25,7 +25,7 @@ jobs:
           fi
 
       - name: Split string
-        if: '!steps.check.outputs.skip'
+        # if: '!steps.check.outputs.skip'
         env:
           BRANCH: ${{ github.ref_name }}
           Issue_ID: ${ ${{ github.ref_name }}% ${{ github.ref_name }}#*-[0-9]+-}
