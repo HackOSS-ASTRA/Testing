@@ -27,8 +27,8 @@ jobs:
       - name: Split string
         if: '!steps.check.outputs.skip'
         env:
-          Issue_ID: ${github.ref_name%{${github.ref_name#*-[0-9]+-}}
-          Issue_Title: ${github.ref_name#*-[0-9]+-}
+          Issue_ID: ${ ${{ github.ref_name }}% ${{ github.ref_name }}#*-[0-9]+-}
+          Issue_Title: ${ ${{github.ref_name }}#*-[0-9]+-}
         id: split
         run:
           echo "$Issue_ID"
