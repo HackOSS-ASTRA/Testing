@@ -38,7 +38,7 @@ jobs:
           ISSUE_TITLE: ${{ steps.split.outputs.ISSUE_TITLE }}
         run:
           echo "$ISSUE_TITLE"
-          echo "${BRANCH%$ISSUE_TITLE}"
+          echo "${BRANCH%-$ISSUE_TITLE}"
           
 
       - name: Create pull request
