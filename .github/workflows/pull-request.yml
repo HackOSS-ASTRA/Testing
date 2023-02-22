@@ -29,7 +29,7 @@ jobs:
         env:
           BRANCH: ${{ github.ref_name }}
           Issue_ID: ${ ${{ github.ref_name }}% ${{ github.ref_name }}#*-[0-9]+-}
-          Issue_Title: "${ ${{ github.ref_name }}#*-*-}"
+          Issue_Title: ${ ${{ github.ref_name }}#*-*-}
         id: split
         run:
           # echo "${ BRANCH% ${BRANCH#*-*-}}"
