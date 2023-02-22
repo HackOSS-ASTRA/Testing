@@ -32,7 +32,7 @@ jobs:
           Issue_Title: "${ ${{ github.ref_name }}#*-*-}"
         id: split
         run:
-          echo "${ BRANCH% ${BRANCH#*-*-}}"
+          # echo "${ BRANCH% ${BRANCH#*-*-}}"
           echo "${BRANCH#*-*-}"
           echo "${Issue_Title}"
 
