@@ -21,7 +21,7 @@ jobs:
         uses: YoNG-Zaii/linear-actions@v1.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          linear_id_prefix: "TEST"
+          linear_id_prefix: "DEMO"
           linear_auth_type: "apiKey"
           linear_auth_key: ${{ secrets.LINEAR_API_KEY }}
           label_name: "bad PR title"
